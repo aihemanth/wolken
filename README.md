@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Document Q&A System – Node.js + Qdrant + Vercel AI SDK
+This is a full-stack application that allows you to:
 
-## Getting Started
+Ingest documents from Google Drive
 
-First, run the development server:
+Store text chunks in Qdrant with OpenAI embeddings
 
-```bash
+Ask questions about those documents using an AI-powered chat interface.
+
+
+ Prerequisites
+Install these tools before running:
+
+Node.js (v18 or later): Download Node.js
+
+Docker (for running Qdrant): Download Docker
+
+Git (for cloning or pushing to repo)
+
+OpenAI API Key – from platform.openai.com/account/api-keys
+
+Google Cloud service account with Drive API access.
+
+
+
+ Setup Instructions
+1. 🚀 Clone the project
+
+git clone https://github.com/aihemanth/wolken.git
+cd wolken
+
+2. 📦 Install dependencies
+
+npm install
+
+
+
+Setup Qdrant with Docker
+
+docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant
+
+
+Create .env.local file
+Create a .env.local file in the root folder with:
+
+env
+OPENAI_API_KEY=your-openai-api-key
+GOOGLE_CLIENT_EMAIL=your-service-account-email@project.iam.gserviceaccount.com
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYOUR_KEY\n-----END PRIVATE KEY-----\n"
+
+🔑 To get Google credentials:
+
+Go to Google Cloud Console
+
+Create a Service Account
+
+Enable Google Drive API
+
+Generate a JSON key and copy the values above
+
+Share the desired Google Drive files with the service account's email.
+
+
+Run the app locally
+To start the dev server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ingest a document
+Run this curl command (replace FILE_ID):
 
-## Learn More
+curl -X POST http://localhost:3000/api/mcp/ingest \
+  -H "Content-Type: application/json" \
+  -d '{"fileId": "your-google-drive-file-id"}'
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ask a question
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+curl -X POST http://localhost:3000/api/mcp/chat \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What is this document about?"}'
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
