@@ -1,4 +1,4 @@
-<img width="1366" height="768" alt="1" src="https://github.com/user-attachments/assets/257006ca-2a2b-48c5-9a45-97d5d32d5189" /><img width="1366" height="768" alt="1" src="https://github.com/user-attachments/assets/311943de-6c16-4997-bd19-d3aaf1b29fc2" />Document Q&A System.
+Document Q&A System.
 
 This is a full-stack application that allows you to:
       
@@ -89,7 +89,5 @@ Ask a question
   	-H "Content-Type: application/json" \
   	-d '{"question": "What is this document about?"}'
 
-output:
-<img width="1366" height="768" alt="1" src="https://github.com/user-attachments/assets/af702f58-b3ef-4c5b-a431-214d9e836aa1" />
 
 
