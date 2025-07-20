@@ -27,4 +27,4 @@ export async function searchChunks(query: string) {
   return results.map(r => r.payload?.text).join('\n');
 }
 
-import { getEmbedding } from './embedding'; // must be placed after definition
+import { getEmbedding } from './embedding'; 
