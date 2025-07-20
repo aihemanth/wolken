@@ -1,0 +1,2 @@
+OpenAI is an AI research company focused on developing friendly AI. Their models are capable of natural language processing, image generation, and code completion.
+
